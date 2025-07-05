@@ -1,0 +1,8 @@
+path: C:\Users\hp\Desktop\Courses\Ai Projects\acney_detector\datasets
+path: C:\Users\hp\Desktop\Courses\Ai Projects\acney_detector\datasets\Acne Classification
+train: /path/to/train/images
+val: /path/to/val/images
+nc: 25  # Number of classes
+names: ['Dermatitis', 'Eksim', 'Karsinoma', 'Pustula', 'Tinea', 'acne', 'blackhead', 'facialis', 'filiform', 'flek', 
+        'folikulitis', 'fulminans', 'fungal', 'herpes', 'hitam', 'kutil', 'melanoma', 'milia', 'nodules', 'panu', 
+        'papula', 'perioral', 'psoriasis', 'rosacea', 'whitehead']

@@ -1,0 +1,587 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>AI Derma</title>
+
+    <!-- Fav Icon -->
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon-3.ico') }}" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link href="{{ url_for('static', filename='css/font-awesome-all.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/flaticon.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/owl.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/jquery.fancybox.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/animate.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/color.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/responsive.css') }}" rel="stylesheet">
+
+    <style>
+        /* Live Acne Detector Styles */
+        .live-detector-section {
+            padding: 100px 0;
+            background: #f9f9f9;
+        }
+        
+        .detector-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+        }
+        
+        #videoElement {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .control-btn {
+            padding: 12px 30px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .start-btn {
+            background: #4e6baf;
+            color: white;
+        }
+        
+        .start-btn:hover {
+            background: #3a5683;
+        }
+        
+        .stop-btn {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .stop-btn:hover {
+            background: #c82333;
+        }
+        
+        .analysis-results {
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+        }
+        
+        .result-item {
+            margin-bottom: 15px;
+        }
+        
+        .result-label {
+            font-weight: bold;
+            color: #4e6baf;
+        }
+        
+        .detection-box {
+            position: absolute;
+            border: 2px solid #4e6baf;
+            background: rgba(78, 107, 175, 0.2);
+            pointer-events: none;
+        }
+        
+        .detection-label {
+            position: absolute;
+            background: #4e6baf;
+            color: white;
+            padding: 2px 6px;
+            font-size: 12px;
+            border-radius: 3px;
+            pointer-events: none;
+        }
+        
+        .acne-type-item {
+            background: #f8f9fa;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .acne-type-name {
+            font-weight: 500;
+            color: #4e6baf;
+        }
+        
+        .acne-type-count {
+            background: #4e6baf;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 14px;
+        }
+        
+        .mt-2 {
+            margin-top: 10px;
+        }
+        
+    </style>
+
+</head>
+
+<body>
+    <div class="boxed_wrapper">
+
+        <!-- preloader -->
+        <div class="loader-wrap">
+            <div class="preloader">
+                <div class="preloader-close">x</div>
+                <div id="handle-preloader" class="handle-preloader">
+                    <div class="animation-preloader">
+                        <div class="spinner"></div>
+                        <div class="txt-loading">
+                            <span data-text-preloader="i" class="letters-loading">A</span>
+                            <span data-text-preloader="i" class="letters-loading">I</span>
+                            <span data-text-preloader="n" class="letters-loading">D</span>
+                            <span data-text-preloader="a" class="letters-loading">E</span>
+                            <span data-text-preloader="a" class="letters-loading">R</span>
+                            <span data-text-preloader="m" class="letters-loading">M</span>
+                            <span data-text-preloader="a" class="letters-loading">A</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- preloader end -->
+
+        <!-- main header -->
+        <header class="main-header header-style-three">
+            <!-- header-lower -->
+            <div class="header-lower">
+                <div class="auto-container">
+                    <div class="outer-box clearfix">
+                        <div class="logo-box pull-left">
+                            <figure class="logo"><a href="{{ url_for('index') }}"><h2 style="color: #4e6baf; font-weight: 700; margin: 0;">AI Derma</h2></a></figure>
+                        </div>
+                        <div class="menu-area pull-right clearfix">
+                            <!--Mobile Navigation Toggler-->
+                            <div class="mobile-nav-toggler">
+                                <i class="icon-bar"></i>
+                                <i class="icon-bar"></i>
+                                <i class="icon-bar"></i>
+                            </div>
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </header>
+        <!-- main-header end -->
+
+        <!-- Mobile Menu  -->
+        <div class="mobile-menu">
+            <div class="menu-backdrop"></div>
+            <div class="close-btn"><i class="fas fa-times"></i></div>
+
+            <nav class="menu-box">
+                <div class="nav-logo"><a href="{{ url_for('index') }}"><h2 style="color: #4e6baf; font-weight: 700; margin: 0;">AI Derma</h2></a></div>
+                <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
+                <div class="contact-info">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li>Chicago 12, Melborne City, USA</li>
+                        <li><a href="tel:+8801682648101">+88 01682648101</a></li>
+                        <li><a href="mailto:info@example.com">info@example.com</a></li>
+                    </ul>
+                </div>
+                <div class="social-links">
+                    <ul class="clearfix">
+                        <li><a href="#"><span class="fab fa-twitter"></span></a></li>
+                        <li><a href="#"><span class="fab fa-facebook-square"></span></a></li>
+                        <li><a href="#"><span class="fab fa-pinterest-p"></span></a></li>
+                        <li><a href="#"><span class="fab fa-instagram"></span></a></li>
+                        <li><a href="#"><span class="fab fa-youtube"></span></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div><!-- End Mobile Menu -->
+
+        <!-- Page Title -->
+        <section class="page-title centred">
+        {% set bg_image = url_for('static', filename='images/shape/shape-87.png') %}
+        <div class="pattern-layer" style="background-image: url('{{ bg_image }}');"></div>
+        <div class="auto-container">
+            <div class="content-box">
+                <h1>Get Instant Results</h1>
+                <ul class="bread-crumb clearfix">
+                    <li><a href="{{ url_for('team') }}">Chatbot</a></li>
+                    <li><a href="{{ url_for('about') }}" data-section="image-analysis">Image Analysis</a></li>
+                    <li><a href="{{ url_for('project') }}"data-section="acne-detector">Live Acne Detector</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+        <!-- End Page Title -->
+
+       
+        <!-- Add this section where you want the live detector to appear -->
+        <section class="live-detector-section">
+            <div class="auto-container">
+                <div class="sec-title style-two">
+                    <h5>LIVE DETECTION</h5>
+                    <h2>Real-time Acne Detection</h2>
+                    {% set divider_url = url_for('static', filename='images/icons/divider-1.png') %}
+                    <div class="divider" style="background-image: url('{{ divider_url }}');"></div>
+                </div>
+                
+                <div class="detector-container">
+                    <div class="video-container">
+                        <video id="videoElement" autoplay></video>
+                        <canvas id="canvasElement" style="display: none;"></canvas>
+                    </div>
+                    
+                    <div class="controls">
+                        <button class="control-btn start-btn" id="startButton">Start Camera</button>
+                        <button class="control-btn stop-btn" id="stopButton" disabled>Stop Camera</button>
+                    </div>
+                    
+                    <div class="analysis-results" id="analysisResults" style="display: none;">
+                        <div class="result-item">
+                            <span class="result-label">Total Acne Count:</span>
+                            <span id="acneCount">0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Primary Acne Type:</span>
+                            <span id="primaryType">None detected</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Professional Analysis:</span>
+                            <div id="analysis" class="mt-2"></div>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Recommended Products:</span>
+                            <ul id="productRecommendations" class="mt-2"></ul>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Lifestyle Recommendations:</span>
+                            <ul id="lifestyleRecommendations" class="mt-2"></ul>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">When to See a Doctor:</span>
+                            <div id="whenToSeeDoctor" class="mt-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- project-section -->
+        <section class="project-section sec-pad centred">
+            
+                    <div class="pagination-wrapper centred">
+                        <ul class="pagination clearfix">
+                            <li><a href="{{ url_for('about') }}"><i class="fas fa-angle-left"></i></a></li>
+                            <li><a href="{{ url_for('about') }}">1</a></li>
+                            <li><a href="{{ url_for('team') }}" class="current">2</a></li>
+                            <li><a href="{{ url_for('project') }}">3</a></li>
+                            <li><a href="{{ url_for('project') }}"><i class="fas fa-angle-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- project-section end -->
+
+
+        <!-- main-footer -->
+        <footer class="main-footer footer-style-three">
+           
+            <div class="footer-bottom">
+                <button class="scroll-top style-one scroll-to-target" data-target="html">
+                    <i class="fas fa-angle-up"></i>
+                </button>
+                <div class="auto-container">
+                    <div class="bottom-inner clearfix">
+                        <div class="copyright pull-left">
+                            <p>Copyright &copy; <a href="{{ url_for('index') }}">Inaama Jay</a>, All Rights Reserved.</p>
+                        </div>
+                        <ul class="footer-nav pull-right clearfix">
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- main-footer end -->
+    </div>
+
+    <!-- JavaScript files -->
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/owl.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/wow.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/validation.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.fancybox.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/appear.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scrollbar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tilt.jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/isotope.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bxslider.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.circleType.js') }}"></script>
+
+    <!-- map script -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-CE0deH3Jhj6GN4YvdCFZS7DpbXexzGU"></script>
+    <script src="{{ url_for('static', filename='js/gmaps.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/map-helper.js') }}"></script>
+
+    <!-- main-js -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <!-- Add this script before </body> -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const video = document.getElementById('videoElement');
+        const canvas = document.getElementById('canvasElement');
+        const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
+        const analysisResults = document.getElementById('analysisResults');
+        let stream = null;
+        let isDetecting = false;
+        let detectionInterval = null;
+        let lastAnalysis = null;
+        
+        // Start camera
+        startButton.addEventListener('click', async function() {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { 
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 },
+                        facingMode: "user"
+                    } 
+                });
+                video.srcObject = stream;
+                startButton.disabled = true;
+                stopButton.disabled = false;
+                isDetecting = true;
+                
+                // Start detection loop
+                detectionInterval = setInterval(detectAcne, 1000); // Detect every second
+            } catch (err) {
+                console.error('Error accessing camera:', err);
+                alert('Error accessing camera. Please make sure you have granted camera permissions.');
+            }
+        });
+        
+        // Stop camera
+        stopButton.addEventListener('click', function() {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+                video.srcObject = null;
+                startButton.disabled = false;
+                stopButton.disabled = true;
+                isDetecting = false;
+                
+                // Stop detection loop
+                if (detectionInterval) {
+                    clearInterval(detectionInterval);
+                }
+                
+                // Hide results
+                analysisResults.style.display = 'none';
+                
+                // Clear detection boxes
+                clearDetectionBoxes();
+            }
+        });
+        
+        // Function to detect acne
+        async function detectAcne() {
+            if (!isDetecting) return;
+            
+            try {
+                // Draw current frame to canvas
+                const context = canvas.getContext('2d');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                
+                // Convert canvas to blob
+                const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.8));
+                
+                // Create form data
+                const formData = new FormData();
+                formData.append('image', blob, 'frame.jpg');
+                
+                // Send to backend
+                const response = await fetch('/analyze_acne', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+                
+                // Update total count
+                document.getElementById('acneCount').textContent = data.acne_count;
+                
+                // Update primary type
+                document.getElementById('primaryType').textContent = data.primary_type || 'None detected';
+                
+                // Update analysis
+                document.getElementById('analysis').innerHTML = data.reasoning || 'No analysis available';
+                
+                // Update product recommendations
+                const productList = document.getElementById('productRecommendations');
+                productList.innerHTML = '';
+                if (data.product_recommendations && data.product_recommendations.length > 0) {
+                    data.product_recommendations.forEach(product => {
+                        const li = document.createElement('li');
+                        li.textContent = product;
+                        productList.appendChild(li);
+                    });
+                } else {
+                    productList.innerHTML = '<li>No specific product recommendations available</li>';
+                }
+                
+                // Update lifestyle recommendations
+                const lifestyleList = document.getElementById('lifestyleRecommendations');
+                lifestyleList.innerHTML = '';
+                if (data.lifestyle_recommendations && data.lifestyle_recommendations.length > 0) {
+                    data.lifestyle_recommendations.forEach(recommendation => {
+                        const li = document.createElement('li');
+                        li.textContent = recommendation;
+                        lifestyleList.appendChild(li);
+                    });
+                } else {
+                    lifestyleList.innerHTML = '<li>No specific lifestyle recommendations available</li>';
+                }
+                
+                // Update when to see doctor
+                document.getElementById('whenToSeeDoctor').innerHTML = data.when_to_see_doctor || 'Consult a dermatologist if condition persists';
+                
+                // Show results
+                analysisResults.style.display = 'block';
+                
+                // Draw detection boxes
+                drawDetectionBoxes(data.detailed_acne_info || []);
+                
+                // Store last analysis
+                lastAnalysis = data;
+                
+            } catch (error) {
+                console.error('Error detecting acne:', error);
+                // If we have a last analysis, keep showing it
+                if (lastAnalysis) {
+                    document.getElementById('acneCount').textContent = lastAnalysis.acne_count;
+                    document.getElementById('primaryType').textContent = lastAnalysis.primary_type || 'None detected';
+                    document.getElementById('analysis').innerHTML = lastAnalysis.reasoning || 'No analysis available';
+                    
+                    // Update product recommendations
+                    const productList = document.getElementById('productRecommendations');
+                    productList.innerHTML = '';
+                    if (lastAnalysis.product_recommendations && lastAnalysis.product_recommendations.length > 0) {
+                        lastAnalysis.product_recommendations.forEach(product => {
+                            const li = document.createElement('li');
+                            li.textContent = product;
+                            productList.appendChild(li);
+                        });
+                    }
+                    
+                    // Update lifestyle recommendations
+                    const lifestyleList = document.getElementById('lifestyleRecommendations');
+                    lifestyleList.innerHTML = '';
+                    if (lastAnalysis.lifestyle_recommendations && lastAnalysis.lifestyle_recommendations.length > 0) {
+                        lastAnalysis.lifestyle_recommendations.forEach(recommendation => {
+                            const li = document.createElement('li');
+                            li.textContent = recommendation;
+                            lifestyleList.appendChild(li);
+                        });
+                    }
+                    
+                    document.getElementById('whenToSeeDoctor').innerHTML = lastAnalysis.when_to_see_doctor || 'Consult a dermatologist if condition persists';
+                    drawDetectionBoxes(lastAnalysis.detailed_acne_info || []);
+                }
+            }
+        }
+        
+        // Function to draw detection boxes
+        function drawDetectionBoxes(detailedInfo) {
+            // Remove existing boxes
+            clearDetectionBoxes();
+            
+            // Draw new boxes
+            detailedInfo.forEach(info => {
+                const { location, type, confidence } = info;
+                const { x1, y1, x2, y2 } = location;
+                
+                const boxElement = document.createElement('div');
+                boxElement.className = 'detection-box';
+                boxElement.style.left = `${x1}px`;
+                boxElement.style.top = `${y1}px`;
+                boxElement.style.width = `${x2 - x1}px`;
+                boxElement.style.height = `${y2 - y1}px`;
+                
+                const labelElement = document.createElement('div');
+                labelElement.className = 'detection-label';
+                labelElement.style.left = `${x1}px`;
+                labelElement.style.top = `${y1 - 20}px`;
+                labelElement.textContent = `${type} (${(confidence * 100).toFixed(1)}%)`;
+                
+                video.parentElement.appendChild(boxElement);
+                video.parentElement.appendChild(labelElement);
+            });
+        }
+        
+        // Function to clear detection boxes
+        function clearDetectionBoxes() {
+            const existingBoxes = document.querySelectorAll('.detection-box, .detection-label');
+            existingBoxes.forEach(box => box.remove());
+        }
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (lastAnalysis) {
+                drawDetectionBoxes(lastAnalysis.detailed_acne_info || []);
+            }
+        });
+    });
+    </script>
+
+</body>
+</html>

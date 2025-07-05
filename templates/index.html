@@ -1,0 +1,715 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>AI Derma</title>
+
+    <!-- Fav Icon -->
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon-2.ico') }}" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link href="{{ url_for('static', filename='css/font-awesome-all.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/flaticon.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/owl.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/jquery.fancybox.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/animate.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/color.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/responsive.css') }}" rel="stylesheet">
+    
+    <!-- Custom CSS for dynamic backgrounds -->
+    <style>
+        .banner-style-three {
+            background-image: url('{{ url_for("static", filename="images/banner/banner-bg-1.1.jpg") }}');
+        }
+        .banner-style-three .pattern-layer {
+            background-image: url('{{ url_for("static", filename="images/shape/shape-17.png") }}');
+        }
+        .divider-1 {
+            background-image: url('{{ url_for("static", filename="images/icons/divider-1.png") }}');
+        }
+        .divider-2 {
+            background-image: url('{{ url_for("static", filename="images/icons/divider-2.png") }}');
+        }
+        .chooseus-style-two .pattern-layer {
+            background-image: url('{{ url_for("static", filename="images/shape/shape-18.png") }}');
+        }
+        .faq-section .bg-layer {
+            background-image: url('{{ url_for("static", filename="images/background/faq-bg.png") }}');
+        }
+        .faq-section .pattern-layer {
+            background-image: url('{{ url_for("static", filename="images/shape/shape-19.png") }}');
+        }
+        .main-footer .pattern-1 {
+            background-image: url('{{ url_for("static", filename="images/shape/shape-21.png") }}');
+        }
+        .main-footer .pattern-2 {
+            background-image: url('{{ url_for("static", filename="images/shape/shape-22.png") }}');
+        }
+    </style>
+</head>
+
+<body>
+    <div class="boxed_wrapper">
+        <!-- preloader -->
+        <div class="loader-wrap">
+            <div class="preloader">
+                <div class="preloader-close">x</div>
+                <div id="handle-preloader" class="handle-preloader">
+                    <div class="animation-preloader">
+                        <div class="spinner"></div>
+                        <div class="txt-loading">
+                            <span data-text-preloader="a" class="letters-loading">A</span>
+                            <span data-text-preloader="i" class="letters-loading">I</span>
+                            <span data-text-preloader="n" class="letters-loading">D</span>
+                            <span data-text-preloader="a" class="letters-loading">E</span>
+                            <span data-text-preloader="a" class="letters-loading">R</span>
+                            <span data-text-preloader="m" class="letters-loading">M</span>
+                            <span data-text-preloader="a" class="letters-loading">A</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- preloader end -->
+
+        <!-- main header -->
+        <header class="main-header header-style-three">
+            <!-- header-lower -->
+            <div class="header-lower">
+                <div class="auto-container">
+                    <div class="outer-box clearfix">
+                        <div class="logo-box pull-left">
+                            <figure class="logo">
+                                <a href="{{ url_for('index') }}">
+                                    <h2 style="color: white; font-weight: 700; margin: 0;">AI Derma</h2>
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="menu-area pull-right clearfix">
+                            <!--Mobile Navigation Toggler-->
+                            <div class="mobile-nav-toggler">
+                                <i class="icon-bar"></i>
+                                <i class="icon-bar"></i>
+                                <i class="icon-bar"></i>
+                            </div>
+                            <nav class="main-menu navbar-expand-md navbar-light">
+                                <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                                    <ul class="navigation clearfix">
+                                        <li><a href="#about">Home</a></li>
+                                        <li><a href="#about">About</a></li> 
+                                        <li><a href="#FAQ">FAQ'S</a></li> 
+                                        <li><a href="#why us">Why Us</a></li> 
+                                        <li><a href="#features">Features</a></li>
+                                        <li><a href="#team">Team</a></li>   
+                                    </ul>
+                                </div>
+                            </nav>
+                            <div class="search-box-outer">
+                                <div class="dropdown">
+                                    <button class="search-box-btn" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                    <div class="dropdown-menu search-panel" aria-labelledby="dropdownMenu3">
+                                        <div class="form-container">
+                                            <form method="post" action="{{ url_for('index') }}">
+                                                <div class="form-group">
+                                                    <input type="search" name="search-field" value="" placeholder="Search...." required="">
+                                                    <button type="submit" class="search-btn">
+                                                        <span class="fas fa-search"></span>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--sticky Header-->
+            <div class="sticky-header">
+                <div class="auto-container">
+                    <div class="outer-box clearfix">
+                        <figure class="sticky-logo pull-left">
+                            <a href="{{ url_for('index') }}">
+                                <h2 style="color: #4e6baf; font-weight: 700; margin: 0;">AI Derma</h2>
+                            </a>
+                        </figure>
+                        <div class="menu-area pull-right clearfix">
+                            <nav class="main-menu clearfix">
+                                <!--Keep This Empty / Menu will come through Javascript-->
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- main-header end -->
+
+        <!-- Mobile Menu  -->
+        <div class="mobile-menu">
+            <div class="menu-backdrop"></div>
+            <div class="close-btn"><i class="fas fa-times"></i></div>
+            
+            <nav class="menu-box">
+                <div class="nav-logo">
+                    <a href="{{ url_for('index') }}">
+                        <h2 style="color: #4e6baf; font-weight: 700; margin: 0;">AI Derma</h2>
+                    </a>
+                </div>
+                <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript/ Same Menu as in Header--></div>
+                <div class="contact-info">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li>Chicago 12, Melborne City, USA</li>
+                        <li><a href="tel:+8801682648101">+88 01682648101</a></li>
+                        <li><a href="mailto:info@example.com">info@example.com</a></li>
+                    </ul>
+                </div>
+                <div class="social-links">
+                    <ul class="clearfix">
+                        <li><a href="#"><span class="fab fa-twitter"></span></a></li>
+                        <li><a href="#"><span class="fab fa-facebook-square"></span></a></li>
+                        <li><a href="#"><span class="fab fa-pinterest-p"></span></a></li>
+                        <li><a href="#"><span class="fab fa-instagram"></span></a></li>
+                        <li><a href="#"><span class="fab fa-youtube"></span></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div><!-- End Mobile Menu -->
+
+        <!-- banner-section -->
+        <section class="banner-style-three">
+            <div class="pattern-layer"></div>
+            <div class="auto-container">
+                <div class="content-box">
+                    <h2>Detect Acne Instantly with AI-Powered Analysis</h2>
+                    <p>The scan result is not a diagnosis. To obtain an accurate diagnosis and a recommendation for treatment - consult your doctor.</p>
+                    <div class="btn-box">
+                        <a href="{{ url_for('index') }}" class="theme-btn btn-six">More Detail</a>
+                        <a href="{{ url_for('about') }}" class="theme-btn btn-seven">Get Started</a>
+                    </div>
+                </div>
+            </div>
+            <ul class="social-links clearfix">
+                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
+            </ul>
+        </section>
+        <!-- banner-section end -->
+
+        <!-- service-style-three -->
+        <section id="features" class="service-style-three"> 
+            <div class="auto-container">
+                <div class="row clearfix">
+                    <div class="col-lg-5 col-md-12 col-sm-12 content-column">
+                        <div class="content_block_6">
+                            <div class="content-box wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                <div class="sec-title style-two">
+                                    <h5>TECHNOLOGY</h5>
+                                    <h2>Why is AI Dermatologist worth using?</h2>
+                                    <div class="divider divider-1"></div>
+                                </div>
+                                <div class="text">
+                                    <p>Our AI Acne Detector is designed to make skincare simple, fast, and accessible to everyone. Say goodbye to guesswork and hello to instant, accurate skin analysis.</p>
+                                </div>
+                                <ul class="list-item clearfix">
+                                    <li>Detects 20+ Acne types, including hormonal, cystic and many more</li>
+                                    <li>Result within 1 minute</li>
+                                    <li>24/7 personal AI Consultant</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-12 col-sm-12 inner-column">
+                        <div class="inner-content mr-100">
+                            <div class="row clearfix">
+                                <div class="col-lg-6 col-md-6 col-sm-12 service-block">
+                                    <div class="service-block-three wow fadeInLeft animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                        <div class="inner-box">
+                                            <figure class="light-icon"><img src="{{ url_for('static', filename='images/icons/icon-8.png') }}" alt=""></figure>
+                                            <div class="icon-box"><i class="flaticon-virtual-reality"></i></div>
+                                            <h3><a href="#">Smart</a></h3>
+                                            <p>Our app has the same accuracy as a professional dermatologist.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 service-block">
+                                    <div class="service-block-three wow fadeInRight animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                        <div class="inner-box">
+                                            <figure class="light-icon"><img src="{{ url_for('static', filename='images/icons/icon-8.png') }}" alt=""></figure>
+                                            <div class="icon-box"><i class="flaticon-artificial-intelligence-1"></i></div>
+                                            <h3><a href="#">Simple</a></h3>
+                                            <p>Place your phone near a face and within 1 minute you will find out acne</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="inner-content ml-100">
+                            <div class="row clearfix">
+                                <div class="col-lg-6 col-md-6 col-sm-12 service-block">
+                                    <div class="service-block-three wow fadeInLeft animated" data-wow-delay="300ms" data-wow-duration="1500ms">
+                                        <div class="inner-box">
+                                            <figure class="light-icon"><img src="{{ url_for('static', filename='images/icons/icon-8.png') }}" alt=""></figure>
+                                            <div class="icon-box"><i class="flaticon-speech"></i></div>
+                                            <h3><a href="#">Accessible</a></h3>
+                                            <p>AI Dermatologist is available anytime, anywhere. Keep your health in check at your fingertips even when you are on the go.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 service-block">
+                                    <div class="service-block-three wow fadeInRight animated" data-wow-delay="300ms" data-wow-duration="1500ms">
+                                        <div class="inner-box">
+                                            <figure class="light-icon"><img src="{{ url_for('static', filename='images/icons/icon-8.png') }}" alt=""></figure>
+                                            <div class="icon-box"><i class="flaticon-cctv-camera"></i></div>
+                                            <h3><a href="#">Affordable</a></h3>
+                                            <p>No subscriptions, no hidden fees—just instant, reliable acne detection accessible to everyone, anytime.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- service-style-three end -->
+
+        <!-- about-style-three -->
+        <section id="about" class="about-style-three">
+            <div class="auto-container">
+                <div class="row align-items-center clearfix">
+                    <div class="col-lg-6 col-md-12 col-sm-12 image-column">
+                        <div class="image-box" style="overflow: visible; width: 100%;">
+                            <figure class="image js-tilt clearfix" style="margin: 0;">
+                                <img src="{{ url_for('static', filename='images/banner/banner-bg-1.2.jpg') }}" alt="" style="width: 100%; height: auto; display: block;">
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                        <div class="content_block_7">
+                            <div class="content-box">
+                                <div class="sec-title style-two">
+                                    <h5>ABOUT</h5>
+                                    <h2>How does Artificial Intelligence analyze images?</h2>
+                                    <div class="divider divider-1"></div>
+                                </div>
+                                <div class="text">
+                                    <p>Our AI-Powered Acne Detection System uses deep learning to analyze skin images and accurately detect different types of acne by examining features like redness, swelling, and texture.</p>
+                                    <p>Trained on thousands of verified images, it provides instant results, evaluates acne severity, explains possible causes, and offers personalized skincare recommendations to help users manage and improve their skin health effectively.</p>
+                                </div>
+                                <div class="btn-box">
+                                    <a href="#" class="theme-btn btn-eight">More About</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- about-style-three end -->
+
+        <!-- funfact-section -->
+        <section class="funfact-section">
+            <div class="auto-container">
+                <div class="inner-container">
+                    <div class="row clearfix">
+                        <div class="col-lg-3 col-md-6 col-sm-12 counter-block">
+                            <div class="counter-block-two">
+                                <div class="inner-box">
+                                    <div class="count-outer count-box">
+                                        <span class="count-text" data-speed="1500" data-stop="2.5">0</span><span>k</span>
+                                    </div>
+                                    <h4>AI Dermatologist users</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 counter-block">
+                            <div class="counter-block-two">
+                                <div class="inner-box">
+                                    <div class="count-outer count-box">
+                                        <span class="count-text" data-speed="1500" data-stop="1.7">0</span><span>k</span>
+                                    </div>
+                                    <h4>Online checks done</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 counter-block">
+                            <div class="counter-block-two">
+                                <div class="inner-box">
+                                    <div class="count-outer count-box">
+                                        <span class="count-text" data-speed="1500" data-stop="375">0</span>
+                                    </div>
+                                    <h4>Acne<br>Detected</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 counter-block">
+                            <div class="counter-block-two">
+                                <div class="inner-box">
+                                    <div class="count-outer count-box">
+                                        <span class="count-text" data-speed="1500" data-stop="3.5">0</span><span>m</span>
+                                    </div>
+                                    <h4>Happy Customers</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- funfact-section end -->
+
+        <!-- chooseus-style-two -->
+        <section id="why us" class="chooseus-style-two">
+            <div class="pattern-layer"></div>
+            <div class="auto-container">
+                <div class="row clearfix">
+                    <div class="col-lg-6 col-md-12 col-sm-12 left-column">
+                        <div class="inner-column wow fadeInLeft animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                            <div class="sec-title light">
+                                <h5>WHY CHOOSE US</h5>
+                                <h2>Why people select us</h2>
+                                <div class="divider divider-2"></div>
+                            </div>
+                            <div class="text">
+                                <p>We offer a smart and reliable acne detection system powered by AI. Our technology is designed to give users fast, accurate, and personalized skin analysis—anytime, anywhere</p>
+                            </div>
+                            <div class="chooseus-block-one">
+                                <div class="inner-box">
+                                    <figure class="icon-box">
+                                        <img src="{{ url_for('static', filename='images/icons/icon-7.png') }}" alt="">
+                                        <div class="shape"></div>
+                                    </figure>
+                                    <h3>Incentive for Results</h3>
+                                    <p>We deliver accurate acne detection and personalized skincare tips to help users see real improvements.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12 right-column">
+                        <div class="inner-column wow fadeInRight animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                            <div class="chooseus-block-one">
+                                <div class="inner-box">
+                                    <figure class="icon-box">
+                                        <img src="{{ url_for('static', filename='images/icons/icon-6.png') }}" alt="">
+                                        <div class="shape"></div>
+                                    </figure>
+                                    <h3>Worldwide Experience</h3>
+                                    <p>Trained on diverse Acne types, our AI ensures reliable results for users around the globe.</p>
+                                </div>
+                            </div>
+                            <div class="chooseus-block-one">
+                                <div class="inner-box">
+                                    <figure class="icon-box">
+                                        <img src="{{ url_for('static', filename='images/icons/icon-9.png') }}" alt="">
+                                        <div class="shape"></div>
+                                    </figure>
+                                    <h3>High-Quality Results</h3>
+                                    <p>Our smart algorithm analyzes redness, swelling, and texture to detect acne types and severity with precision.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- chooseus-style-two end -->
+
+        <!-- team-section -->
+        <section id="team" class="team-section">
+            <div class="auto-container">
+                <div class="sec-title style-two">
+                    <h5>TEAM MEMBERS</h5>
+                    <h2>Our best team person</h2>
+                    <div class="divider divider-1"></div>
+                </div>
+                <div class="four-item-carousel owl-carousel owl-theme owl-dots-none">
+                    <div class="team-block-one">
+                        <div class="inner-box">
+                           <figure class="image-box">
+                                <img src="{{ url_for('static', filename='images/team/team-4.png') }}" alt="">
+                            </figure>
+                            <div class="lower-content">
+                                <div class="text">
+                                    <h3><a href="#">Saima</a></h3>
+                                    <span class="designation">Software Engineer</span>
+                                </div>
+                                <div class="overlay-content">
+                                    <p><a href="mailto:infosupport@info.com">infosupport@info.com</a></p>
+                                    <ul class="social-links clearfix"> 
+                                        <li><a href="#"><i class="fab fa-twitter-square"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-pinterest-square"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-dribbble-square"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-block-one">
+                        <div class="inner-box">
+                            <figure class="image-box">
+                                <img src="{{ url_for('static', filename='images/team/team-2.png') }}" alt="">
+                            </figure>
+                            <div class="lower-content">
+                                <div class="text">
+                                    <h3><a href="#">Nimra</a></h3>
+                                    <span class="designation">Software Enginner</span>
+                                </div>
+                                <div class="overlay-content">
+                                    <p><a href="mailto:infosupport@info.com">infosupport@info.com</a></p>
+                                    <ul class="social-links clearfix"> 
+                                        <li><a href="#"><i class="fab fa-twitter-square"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-pinterest-square"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-dribbble-square"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-block-one">
+                        <div class="inner-box">
+                            <figure class="image-box">
+                                <img src="{{ url_for('static', filename='images/team/team-2.png') }}" alt="">
+                            </figure>
+                            <div class="lower-content">
+                                <div class="text">
+                                    <h3><a href="#">Laiba Javaid</a></h3>
+                                    <span class="designation">Software Engineer</span>
+                                </div>
+                                <div class="overlay-content">
+                                    <p><a href="mailto:Nimra@gmail.com">Laiba@gmail.com</a></p>
+                                    <ul class="social-links clearfix"> 
+                                        <li><a href="#"><i class="fab fa-twitter-square"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-pinterest-square"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-dribbble-square"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-block-one">
+                        <div class="inner-box">
+                            <figure class="image-box">
+                                <img src="{{ url_for('static', filename='images/team/team-4.png') }}" alt="">
+                            </figure>
+                            <div class="lower-content">
+                                <div class="text">
+                                    <h3><a href="#">Adan Riaz</a></h3>
+                                    <span class="designation">Software Engineer</span>
+                                </div>
+                                <div class="overlay-content">
+                                    <p><a href="mailto:saima@gmail.com">Adan@gmail.com</a></p>
+                                    <ul class="social-links clearfix"> 
+                                        <li><a href="#"><i class="fab fa-twitter-square"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-pinterest-square"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-dribbble-square"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- team-section end -->
+
+        <!-- faq-section -->
+        <section id="FAQ" class="faq-section">
+            <div class="bg-layer"></div>
+            <div class="pattern-layer"></div>
+            <div class="auto-container">
+                <div class="row clearfix">
+                    <div class="col-lg-8 col-md-12 col-sm-12 offset-lg-4 content-column">
+                        <div class="content-box">
+                            <div class="sec-title style-two light">
+                                <h5>CLIENT FAQ'S</h5>
+                                <h2>Questions and answers for <br>common queries</h2>
+                                <div class="divider divider-2"></div>
+                                <a href="{{ url_for('index') }}">class="theme-btn btn-eight">More Answer</a>
+                            </div>
+                            <ul class="accordion-box">
+                                <li class="accordion block active-block">
+                                    <div class="acc-btn active">
+                                        <div class="icon-outer"><i class="fas fa-plus"></i></div>
+                                        <h5>What types of acne can your system detect?</h5>
+                                    </div>
+                                    <div class="acc-content current">
+                                        <div class="text">
+                                            <p>Our AI system is trained to detect 25 different acne types, including:
+Blackhead, Whitehead, Papule, Pustule, Nodule, Cyst, Milia, Comedonal, Hormonal, Cystic, Inflammatory, Noninflammatory, Mild, Moderate, Severe, Fungal Acne, Rosacea, Perioral Dermatitis, Steroid Acne, Excoriated Acne, Acne Vulgaris, Acne Conglobata, Acne Fulminans, Pomade Acne, and Mechanical Acne.
+This helps ensure a complete and accurate analysis for users of all skin types and conditions.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="accordion block">
+                                    <div class="acc-btn">
+                                        <div class="icon-outer"><i class="fas fa-plus"></i></div>
+                                        <h5>Can I track changes in my acne over time using this system?</h5>
+                                    </div>
+                                    <div class="acc-content">
+                                        <div class="text">
+                                            <p>Yes, our system allows you to upload updated images over time, making it easier to monitor progress. You can see how your acne severity changes—whether it's improving or worsening—and adjust your skincare routine accordingly.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="accordion block">
+                                     <div class="acc-btn">
+                                        <div class="icon-outer"><i class="fas fa-plus"></i></div>
+                                        <h5>What kind of skincare recommendations will I get?</h5>
+                                    </div>
+                                    <div class="acc-content">
+                                        <div class="text">
+                                            <p>Based on your acne type and severity, our AI provides personalized skincare recommendations. This may include product suggestions, routine tips, and lifestyle changes to help reduce acne and improve skin health. The recommendations are designed to support both prevention and treatment.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="accordion block">
+                                     <div class="acc-btn">
+                                        <div class="icon-outer"><i class="fas fa-plus"></i></div>
+                                        <h5>Is my photo data safe and private?</h5>
+                                    </div>
+                                    <div class="acc-content">
+                                        <div class="text">
+                                            <p>Yes, your uploaded image is only used for instant acne detection and is not saved or stored anywhere. We do not use your image for training, sharing, or any other purpose. Once the result is shown, the image is automatically discarded.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- faq-section end -->
+
+        <!-- main-footer -->
+        <footer class="main-footer footer-style-three">
+            <div class="footer-top-two">
+                <div class="pattern-layer">
+                    <div class="pattern-1"></div>
+                    <div class="pattern-2"></div>
+                </div>
+                <div class="auto-container">
+                    <div class="row clearfix">
+                        <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                            <div class="footer-widget logo-widget">
+                                <figure class="footer-logo">
+                                    <a href="{{ url_for('index') }}">
+                                        <h2 style="color: #4e6baf; font-weight: 700; margin: 0;">AI Derma</h2>
+                                    </a>
+                                </figure>
+                                <div class="text">
+                                    <p>We help individuals and skincare professionals detect and understand acne types with AI-powered accuracy. Our goal is to make skin analysis fast, reliable, and accessible to everyone.</p>
+                                </div>
+                                <ul class="social-links clearfix">
+                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                            <div class="footer-widget links-widget ml-40">
+                                <div class="widget-title">
+                                    <h3>Useful Links</h3>
+                                </div>
+                                <div class="widget-content">
+                                    <ul class="links-list clearfix">
+                                        <li><a href="#">Advertising & Marketing</a></li>
+                                        <li><a href="#">Healthcare & Medicine</a></li>
+                                        <!-- <li><a href="#">Financials & Banking</a></li>
+                                        <li><a href="#">Data Warehousing</a></li>
+                                        <li><a href="#">Travel & Hospitality</a></li>
+                                        <li><a href="#">Media & Entertainment</a></li> -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                            <div class="footer-widget contact-widget">
+                                <div class="widget-title">
+                                    <h3>Contact Us</h3>
+                                </div>
+                                <div class="widget-content">
+                                    <ul class="info-list clearfix">
+                                        <li>
+                                            <h4>Office Location</h4>
+                                            <p>134, Peshwar Road Denmark</p>
+                                        </li>
+                                        <li>
+                                            <h4>Phone No.</h4>
+                                            <p><a href="tel:0088827240">+00-888-27-240</a></p>
+                                        </li>
+                                        <li>
+                                            <h4>Email Address</h4>
+                                            <p><a href="mailto:support@info.com">aims99112@gmail.com</a></p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <!-- scroll to top -->
+                <button class="scroll-top style-one scroll-to-target" data-target="html">
+                    <i class="fas fa-angle-up"></i>
+                </button>
+                <div class="auto-container">
+                    <div class="bottom-inner clearfix">
+                        <div class="copyright pull-left">
+                            <p>Copyright &copy; <a href="{{ url_for('index') }}">AI Derma</a>, All Rights Reserved.</p>
+                        </div>
+                        <ul class="footer-nav pull-right clearfix">
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- main-footer end -->
+    </div>
+
+    <!-- jQuery plugins -->
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/owl.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/wow.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/validation.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.fancybox.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/appear.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scrollbar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tilt.jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/isotope.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bxslider.js') }}"></script>
+
+    <!-- Main JS -->
+   
+
+
+<!-- Main JS -->
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body><!-- End of .page_wrapper -->
+</html>

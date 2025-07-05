@@ -1,0 +1,651 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Derma</title>
+
+    <!-- Fav Icon -->
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon-3.ico') }}" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link href="{{ url_for('static', filename='css/font-awesome-all.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/flaticon.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/owl.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/jquery.fancybox.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/animate.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/color.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/responsive.css') }}" rel="stylesheet">
+    
+    <!-- Scroll Fix CSS -->
+    <style>
+        /* Fix for scroll issue */
+        html, body {
+            overflow-x: hidden;
+            overflow-y: auto;
+            height: auto;
+            position: relative;
+        }
+
+        /* Ensure preloader hides completely */
+        .handle-preloader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 999999;
+            background: #ffffff;
+            transition: all 0.5s ease;
+        }
+
+        .handle-preloader.done {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        /* Fix for boxed wrapper */
+        .boxed_wrapper {
+            position: relative;
+            overflow: visible;
+            width: 100%;
+        }
+
+        /* Ensure content can flow past viewport */
+        .auto-container {
+            position: relative;
+            max-width: 1200px;
+            padding: 0 15px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Fix for sticky header */
+        .sticky-header {
+            position: fixed;
+            width: 100%;
+            left: 0;
+            top: 0;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .sticky-header.fixed {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Make sure sections have proper spacing */
+        section {
+            position: relative;
+            padding: 100px 0;
+            overflow: hidden;
+        }
+
+        /* Mobile menu fix */
+        .mobile-menu {
+            position: fixed;
+            overflow-y: auto;
+        }
+        
+        /* Chatbot Styles */
+        .chatbot-container {
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f7fa;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .chatbot-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .chatbot-messages {
+            height: 400px;
+            overflow-y: auto;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 20px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+        
+        .user-message {
+            background: #e3f2fd;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .bot-message {
+            background: #f1f1f1;
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .chatbot-input {
+            display: flex;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+        }
+        
+        .chatbot-input button {
+            margin-left: 10px;
+            padding: 12px 20px;
+            background: #4e6baf;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+        
+        .active-section {
+            color: #4e6baf !important;
+            font-weight: bold;
+        }
+       
+    .acne-analysis-section {
+        padding: 100px 0;
+        background: #f9f9f9;
+    }
+    
+    .upload-box {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+    
+    .upload-area {
+        border: 2px dashed #ddd;
+        border-radius: 10px;
+        padding: 40px 20px;
+        margin-bottom: 20px;
+        transition: all 0.3s;
+    }
+    
+    .upload-area:hover {
+        border-color: #4e6baf;
+    }
+    
+    .upload-area i {
+        font-size: 48px;
+        color: #4e6baf;
+        margin-bottom: 15px;
+    }
+    
+    .upload-btn {
+        background: #4e6baf;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 50px;
+        display: inline-block;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    
+    .upload-btn:hover {
+        background: #3a5683;
+        transform: translateY(-2px);
+    }
+    
+    .image-preview {
+        margin-top: 20px;
+        border-radius: 10px;
+        overflow: hidden;
+        max-height: 300px;
+    }
+    
+    .image-preview img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    .analysis-results {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+        height: 100%;
+    }
+    
+    .result-item {
+        margin-bottom: 20px;
+    }
+    
+    .count-box, .type-box {
+        background: #f1f5ff;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #4e6baf;
+    }
+    
+    .type-box {
+        font-size: 18px;
+        text-transform: capitalize;
+    }
+    
+    .analysis-details, .recommendations {
+        margin-top: 30px;
+    }
+    
+    .reasoning-box {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 4px solid #4e6baf;
+    }
+    
+    .recommendations ul {
+        padding-left: 20px;
+    }
+    
+    .recommendations li {
+        margin-bottom: 8px;
+    }
+    
+    .analyze-btn {
+        background: #4e6baf;
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 50px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 30px;
+        transition: all 0.3s;
+    }
+    
+    .analyze-btn:hover {
+        background: #3a5683;
+    }
+    
+    .analyze-btn:disabled {
+        background: #cccccc;
+        cursor: not-allowed;
+    }
+</style>
+    </style>
+</head>
+
+<body class="boxed_wrapper">
+
+    <!-- preloader -->
+    <div class="loader-wrap">
+        <div class="preloader">
+            <div class="preloader-close">x</div>
+            <div id="handle-preloader" class="handle-preloader">
+                <div class="animation-preloader">
+                    <div class="spinner"></div>
+                    <div class="txt-loading">
+                        <span data-text-preloader="i" class="letters-loading">A</span>
+                        <span data-text-preloader="n" class="letters-loading">I</span>
+                        <span data-text-preloader="a" class="letters-loading">D</span>
+                        <span data-text-preloader="a" class="letters-loading">E</span>
+                        <span data-text-preloader="m" class="letters-loading">R</span>
+                        <span data-text-preloader="a" class="letters-loading">M</span>
+                        <span data-text-preloader="a" class="letters-loading">A</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- preloader end -->
+
+    <!-- main header -->
+    <header class="main-header header-style-three">
+        
+
+      
+    </header>
+    <!-- main-header end -->
+
+    <!-- Mobile Menu  -->
+    <div class="mobile-menu">
+        <div class="menu-backdrop"></div>
+        <div class="close-btn"><i class="fas fa-times"></i></div>
+
+        <nav class="menu-box">
+            <div class="nav-logo"><a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/logo-4.png') }}" alt="" title=""></a></div>
+            <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript--></div>
+            <div class="contact-info">
+                <h4>Contact Info</h4>
+                <ul>
+                    <li>Chicago 12, Melborne City, USA</li>
+                    <li><a href="tel:+8801682648101">+88 01682648101</a></li>
+                    <li><a href="mailto:info@example.com">info@example.com</a></li>
+                </ul>
+            </div>
+            
+        </nav>
+    </div><!-- End Mobile Menu -->
+
+    <!-- Page Title -->
+    <section class="page-title centred">
+        {% set bg_image = url_for('static', filename='images/shape/shape-87.png') %}
+        <div class="pattern-layer" style="background-image: url('{{ bg_image }}');"></div>
+        <div class="auto-container">
+            <div class="content-box">
+                <h1>Get Instant Results</h1>
+                <ul class="bread-crumb clearfix">
+                    <li><a href="{{ url_for('team') }}">Chatbot</a></li>
+                    <li><a href="{{ url_for('about') }}" data-section="image-analysis">Image Analysis</a></li>
+                    <li><a href="{{ url_for('project') }}"data-section="acne-detector">Live Acne Detector</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- End Page Title -->
+
+  
+
+    <!-- works-style-two -->
+    <section class="works-style-two centred ">
+        <!-- {% set shape_image = url_for('static', filename='images/shape/shape-13.png') %}
+        <div class="pattern-layer" style="background-image: url('{{ shape_image }}');"></div> -->
+        <div class="auto-container">
+            {% set divider_image = url_for('static', filename='images/icons/divider-1.png') %}
+            <div class="sec-title style-two">
+                <h5>HOW IT WORKS</h5>
+                <h2>Easy and simple work process</h2>
+                <div class="divider" style="background-image: url('{{ divider_image }}');"></div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-4 col-md-6 col-sm-12 works-block">
+                    <div class="works-block-two">
+                        <div class="inner-box wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                            <div class="text">
+                                <h3>Take a photo</h3>
+                                <p>Keep zoomed at the closest distance (less than 10 cm), keep in focus and center to the objects</p>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 works-block">
+                    <div class="works-block-two">
+                        <div class="inner-box wow fadeInUp animated" data-wow-delay="300ms" data-wow-duration="1500ms">
+                            <div class="text">
+                                <h3>Identify and send</h3>
+                                <p>Send your photo to the Artificial Intelligence. The system will analyze it and send you a risk assessment.</p>
+                            </div>
+                            <!--  -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 works-block">
+                    <div class="works-block-two">
+                        <div class="inner-box wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
+                            <div class="text">
+                                <h3>Receive your risk assessment</h3>
+                                <p>Get the result within 60 seconds and related advice on the next steps to take.</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- works-style-two end -->
+<!-- Replace the acne-analysis-section with this code -->
+<section class="acne-analysis-section">
+    <div class="auto-container">
+        <!-- Section Title -->
+        <div class="sec-title style-two text-center">
+            <h5>ACNE ANALYSIS</h5>
+            <h2>Get Instant Skin Diagnosis</h2>
+            {% set divider_url = url_for('static', filename='images/icons/divider-1.png') %}
+<div class="divider" style="background-image: url('{{ divider_url }}');"></div>
+
+        </div>
+        
+        <!-- Upload Box - Full Width -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10 col-sm-12">
+                <div class="upload-box">
+                    <div class="upload-area">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>Upload Your Skin Image</h3>
+                        <p>Supported formats: JPG, PNG</p>
+                        <form id="upload-form" enctype="multipart/form-data">
+                            <input type="file" id="skin-image" name="image" accept="image/*" style="display: none;">
+                            <label for="skin-image" class="upload-btn">Choose File</label>
+                        </form>
+                    </div>
+                    <div class="image-preview" id="image-preview">
+                        <img id="preview-image" src="" alt="Preview" style="display: none;">
+                    </div>
+                    <button class="analyze-btn" id="analyze-btn" disabled>Analyze Image</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Results Section - Appears Below Upload Box -->
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-10 col-md-12 col-sm-12">
+                <div class="analysis-results" id="results-container" style="display: none;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="result-item">
+                                <h4>Acne Count</h4>
+                                <div class="count-box" id="acne-count">0</div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-6">
+                            <div class="result-item">
+                                <h4>Primary Type</h4>
+                                <div class="type-box" id="primary-type">None detected</div>
+                            </div>
+                        </div> -->
+                    </div>
+                    
+                    <div class="analysis-details mt-4">
+                        <h4>Analysis</h4>
+                        <div class="reasoning-box" id="reasoning">
+                            Upload an image to get analysis results.
+                        </div>
+                    </div>
+                    
+                    <div class="recommendations mt-4">
+                        <h4>Recommendations</h4>
+                        <ul id="recommendations">
+                            <li>Upload an image to get personalized recommendations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chatbot Section
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-8 col-md-10 col-sm-12">
+                <div class="chatbot-container" style="display: block;">
+                    <div class="chatbot-header">
+                        <h3>AI Dermatology Assistant</h3>
+                    </div>
+                    <div class="chatbot-messages" id="chat-messages"></div>
+                    <div class="chatbot-input">
+                        <input type="text" id="chat-input" placeholder="Ask about your skin condition...">
+                        <button id="send-message">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</section>
+
+    <!-- main-footer -->
+    <footer class="main-footer footer-style-three">
+        <div class="footer-bottom">
+            <!-- scroll to top -->
+            <button class="scroll-top style-one scroll-to-target" data-target="html">
+                <i class="fas fa-angle-up"></i>
+            </button>
+            <div class="auto-container">
+                <div class="bottom-inner clearfix">
+                    <div class="copyright pull-left">
+                        <p>Copyright &copy; <a href="{{ url_for('index') }}">AI Derma</a>, All Rights Reserved.</p>
+                    </div>
+                    <ul class="footer-nav pull-right clearfix">
+                        <li><a href="{{ url_for('index') }}">Privacy Policy</a></li>
+                        <li><a href="{{ url_for('index') }}">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- main-footer end -->
+
+    <!-- jequery plugins -->
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/owl.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/wow.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/validation.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.fancybox.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/appear.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scrollbar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tilt.jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/isotope.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bxslider.js') }}"></script>
+
+    <!-- main-js -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('skin-image');
+    const previewImage = document.getElementById('preview-image');
+    const analyzeBtn = document.getElementById('analyze-btn');
+    const resultsContainer = document.getElementById('results-container');
+    
+    fileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+                previewImage.style.display = 'block';
+                analyzeBtn.disabled = false;
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+    
+    analyzeBtn.addEventListener('click', function() {
+        if (!fileInput.files.length) return;
+        
+        // Show loading state
+        analyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
+        analyzeBtn.disabled = true;
+        
+        const formData = new FormData();
+        formData.append('image', fileInput.files[0]);
+        
+        fetch('/analyze_acne', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                throw new Error(data.error);
+            }
+            
+            // Update basic results
+            document.getElementById('acne-count').textContent = data.acne_count;
+           // document.getElementById('primary-type').textContent = data.primary_type ? 
+                data.primary_type.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase()) ;
+                'None detected';
+            
+            // Update reasoning section
+            const reasoningHTML = `
+                <h5>Detailed Analysis</h5>
+                <p>${data.reasoning || 'No detailed analysis available'}</p>
+            `;
+            document.getElementById('reasoning').innerHTML = reasoningHTML;
+            
+            // Update recommendations section
+            let recommendationsHTML = '';
+            
+            if (data.product_recommendations && data.product_recommendations.length > 0) {
+                recommendationsHTML += `
+                    <h5>Product Recommendations</h5>
+                    <ul>
+                        ${data.product_recommendations.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                `;
+            }
+            
+            if (data.lifestyle_recommendations && data.lifestyle_recommendations.length > 0) {
+                recommendationsHTML += `
+                    <h5>Lifestyle Recommendations</h5>
+                    <ul>
+                        ${data.lifestyle_recommendations.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                `;
+            }
+            
+            if (data.when_to_see_doctor) {
+                recommendationsHTML += `
+                    <h5>When to See a Doctor</h5>
+                    <p>${data.when_to_see_doctor}</p>
+                `;
+            }
+            
+            document.getElementById('recommendations').innerHTML = recommendationsHTML || 
+                '<p>No specific recommendations available</p>';
+            
+            // Update preview image with blurred version
+            previewImage.src = `data:image/jpeg;base64,${data.blurred_image}`;
+            
+            // Show results
+            resultsContainer.style.display = 'block';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error analyzing image: ' + error.message);
+        })
+        .finally(() => {
+            // Reset button
+            analyzeBtn.innerHTML = 'Analyze Image';
+            analyzeBtn.disabled = false;
+        });
+    });
+});
+</script>
+</body>
+</html>

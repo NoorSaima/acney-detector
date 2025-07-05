@@ -1,0 +1,464 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>AI Derma - Team</title>
+
+    <!-- Fav Icon -->
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon-3.ico') }}" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link href="{{ url_for('static', filename='css/font-awesome-all.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/flaticon.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/owl.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/jquery.fancybox.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/animate.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/color.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/responsive.css') }}" rel="stylesheet">
+    
+    <!-- Scroll Fix CSS -->
+    <style>
+      /* Fix for scroll issue - Replace your current html/body styles */
+html, body {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.boxed_wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensure content can grow */
+.auto-container {
+    flex: 1;
+}
+
+/* Fix for preloader */
+.handle-preloader {
+    position: fixed;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Make sure sections don't constrain height */
+section {
+    position: relative;
+    overflow: visible;
+}
+
+        /* Ensure preloader hides completely */
+        .handle-preloader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 999999;
+            background: #ffffff;
+            transition: all 0.5s ease;
+        }
+
+        .handle-preloader.done {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        /* Fix for sticky header */
+        .sticky-header {
+            position: fixed;
+            width: 100%;
+            left: 0;
+            top: 0;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .sticky-header.fixed {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Make sure sections have proper spacing */
+        section {
+            position: relative;
+            padding: 100px 0;
+            overflow: hidden;
+        }
+
+        /* Mobile menu fix */
+        .mobile-menu {
+            position: fixed;
+            overflow-y: auto;
+        }
+
+        /* Chatbot Styles */
+        .chatbot-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f7fa;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .chatbot-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .chatbot-messages {
+            height: 400px;
+            overflow-y: auto;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 20px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+        
+        .user-message {
+            background: #e3f2fd;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .bot-message {
+            background: #f1f1f1;
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .chatbot-input {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+        }
+        
+        .chatbot-input button {
+            padding: 12px 20px;
+            background: #4e6baf;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .chatbot-input button:hover {
+            background: #3a5683;
+        }
+
+        /* Team Section Styles */
+        .team-section {
+            padding: 100px 0;
+            background: #fff;
+        }
+        
+        .team-block-one {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .team-block-one .inner-box {
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .team-block-one .inner-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .team-block-one .image-box {
+            position: relative;
+            overflow: hidden;
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+        }
+        
+        .team-block-one .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .team-block-one .social-links {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(78, 107, 175, 0.8);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .team-block-one .inner-box:hover .social-links {
+            opacity: 1;
+        }
+        
+        .team-block-one .social-links li {
+            margin: 0 10px;
+        }
+        
+        .team-block-one .social-links a {
+            color: white;
+            font-size: 16px;
+        }
+        
+        .team-block-one h3 {
+            margin-bottom: 5px;
+        }
+        
+        .team-block-one .designation {
+            color: #4e6baf;
+            font-weight: 500;
+        }
+        
+    </style>
+</head>
+
+<body class="boxed_wrapper">
+
+    <!-- preloader -->
+    <div class="loader-wrap">
+        <div class="preloader">
+            <div class="preloader-close">x</div>
+            <div id="handle-preloader" class="handle-preloader">
+                <div class="animation-preloader">
+                    <div class="spinner"></div>
+                    <div class="txt-loading">
+                        <span data-text-preloader="i" class="letters-loading">A</span>
+                        <span data-text-preloader="i" class="letters-loading">I</span>
+                        <span data-text-preloader="n" class="letters-loading">D</span>
+                        <span data-text-preloader="a" class="letters-loading">E</span>
+                        <span data-text-preloader="a" class="letters-loading">R</span>
+                        <span data-text-preloader="m" class="letters-loading">M</span>
+                        <span data-text-preloader="a" class="letters-loading">A</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- preloader end -->
+
+    <!-- main header -->
+    <header class="main-header header-style-three">
+        <!-- header-lower -->
+       
+
+        
+    </header>
+    <!-- main-header end -->
+
+    <!-- Mobile Menu  -->
+    <div class="mobile-menu">
+        <div class="menu-backdrop"></div>
+        <div class="close-btn"><i class="fas fa-times"></i></div>
+
+        <nav class="menu-box">
+            <div class="nav-logo"><a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/logo-4.png') }}" alt="" title=""></a></div>
+            <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
+            <div class="contact-info">
+                <h4>Contact Info</h4>
+                <ul>
+                    <li>Chicago 12, Melborne City, USA</li>
+                    <li><a href="tel:+8801682648101">+88 01682648101</a></li>
+                    <li><a href="mailto:info@example.com">info@example.com</a></li>
+                </ul>
+            </div>
+            <div class="social-links">
+                <ul class="clearfix">
+                    <li><a href="#"><span class="fab fa-twitter"></span></a></li>
+                    <li><a href="#"><span class="fab fa-facebook-square"></span></a></li>
+                    <li><a href="#"><span class="fab fa-pinterest-p"></span></a></li>
+                    <li><a href="#"><span class="fab fa-instagram"></span></a></li>
+                    <li><a href="#"><span class="fab fa-youtube"></span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div><!-- End Mobile Menu -->
+
+    <!-- Page Title -->
+    <section class="page-title centred">
+        {% set bg_image = url_for('static', filename='images/shape/shape-87.png') %}
+        <div class="pattern-layer" style="background-image: url('{{ bg_image }}');"></div>
+        <div class="auto-container">
+            <div class="content-box">
+                <h1>Get Instant Results</h1>
+                <ul class="bread-crumb clearfix">
+                    <li><a href="{{ url_for('team') }}">Chatbot</a></li>
+                    <li><a href="{{ url_for('about') }}" data-section="image-analysis">Image Analysis</a></li>
+                    <li><a href="{{ url_for('project') }}"data-section="acne-detector">Live Acne Detector</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- End Page Title -->
+
+    <!-- Chatbot Section -->
+    <section class="chatbot-section">
+        <div class="auto-container">
+            <div class="sec-title style-two">
+                <h5>AI ASSISTANT</h5>
+                <h2>Chat with Our Dermatology Expert</h2>
+                {% set divider_url = url_for('static', filename='images/icons/divider-1.png') %}
+                <div class="divider" style="background-image: url('{{ divider_url }}');"></div>
+            </div>
+            
+            <div class="chatbot-container">
+                <div class="chatbot-header">
+                    <h3>AI Dermatology Assistant</h3>
+                </div>
+                <div class="chatbot-messages" id="chat-messages"></div>
+                    <div class="chatbot-input">
+                    <input type="text" id="chat-input" placeholder="Ask about your skin condition...">
+                    <button id="send-message">Send</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- main-footer -->
+    <footer class="main-footer footer-style-three">
+        <div class="footer-bottom">
+            <!-- scroll to top -->
+            <button class="scroll-top style-one scroll-to-target" data-target="html">
+                <i class="fas fa-angle-up"></i>
+            </button>
+            <div class="auto-container">
+                <div class="bottom-inner clearfix">
+                    <div class="copyright pull-left">
+                        <p>Copyright &copy; <a href="{{ url_for('index') }}">AI Derma</a>, All Rights Reserved.</p>
+                    </div>
+                    <ul class="footer-nav pull-right clearfix">
+                        <li><a href="{{ url_for('team') }}">Privacy Policy</a></li>
+                        <li><a href="{{ url_for('team') }}">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- main-footer end -->
+
+    <!-- jequery plugins -->
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/owl.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/wow.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/validation.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.fancybox.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/appear.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scrollbar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tilt.jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/isotope.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bxslider.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.circleType.js') }}"></script>
+
+    <!-- map script -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-CE0deH3Jhj6GN4YvdCFZS7DpbXexzGU"></script>
+    <script src="{{ url_for('static', filename='js/gmaps.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/map-helper.js') }}"></script>
+
+    <!-- main-js -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
+    <!-- Chatbot JavaScript -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const sendButton = document.getElementById('send-message');
+        
+        // Add initial bot message
+        addMessage("Hello! I'm your AI dermatology assistant. You can ask me questions about your skin condition, acne types, treatments, or general skincare advice.", 'bot');
+        
+        function addMessage(message, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            messageDiv.textContent = message;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        function sendChatMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+            
+            // Add user message
+            addMessage(message, 'user');
+            chatInput.value = '';
+            
+            // Send to backend
+            fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: message
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+                addMessage(data.response, 'bot');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                addMessage('Sorry, I encountered an error. Please try again.', 'bot');
+            });
+        }
+        
+        sendButton.addEventListener('click', sendChatMessage);
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendChatMessage();
+            }
+        });
+    });
+    </script>
+</body>
+</html>
